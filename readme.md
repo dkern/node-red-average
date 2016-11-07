@@ -1,6 +1,10 @@
 node-red-contrib-average
 ========================
 
+[![GitHub version](https://badge.fury.io/gh/eisbehr-%2Fnode-red-average.svg)](http://github.com/eisbehr-/node-red-average)
+[![NPM version](https://badge.fury.io/js/node-red-contrib-average.svg)](http://www.npmjs.org/package/node-red-contrib-average)
+[![Dependencies Status](https://david-dm.org/eisbehr-/node-red-average/status.svg)](https://david-dm.org/eisbehr-/node-red-average)
+
 A <a href="http://nodered.org" target="_new">Node-RED</a> node to calculate average (_avg_).
 
 ---

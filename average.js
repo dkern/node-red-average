@@ -8,18 +8,25 @@ module.exports = function(RED) {
         this.topics = {};
 
         this.on("input", function(msg) {
-            if( !isNaN(parseFloat(msg.payload)) && isFinite(msg.payload)) {
-                node.topics[msg.topic.toString()] = parseInt(msg.payload, 10);
+        	if( msg.hasOwnProperty("payload") ) {
+				var input = Number(msg.payload);
 
-                var amount = 0;
-                var sum = Object.keys(node.topics).reduce(function(a, b) {
-                    ++amount;
-                    return a + node.topics[b];
-                }, 0);
+				if( !isNaN(input) && isFinite(input) ) {
+					node.topics[msg.topic.toString()] = input;
 
-                msg.payload = sum / amount;
-                node.send(msg);
-            }
+	                var amount = 0;
+	                var sum = Object.keys(node.topics).reduce(function(a, b) {
+	                    ++amount;
+	                    return a + node.topics[b];
+	                }, 0);
+
+	                msg.payload = sum / amount;
+	                node.send(msg);
+				}
+				else {
+					node.log("Not a number: " + msg.payload);
+				}
+			}
         });
     }
 

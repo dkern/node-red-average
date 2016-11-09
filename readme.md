@@ -30,12 +30,13 @@ npm install node-red-contrib-average
 
 ## Usage
 
-Calculate the average of incoming `msg.payload` values.
+Calculate the average of incoming `msg.payload` values from across a number of different `msg.topic`.
 
 Incoming `msg.topic` has to be used to separate and identify values.
 Messages not containing a valid numeric value will be rejected.
 
-Will return the current average as `msg.payload`. Every other data will be pushed through.
+Will return the current average of all different `msg.topic` values as `msg.payload`.
+Every other data will be pushed through.
 
 
 ## Example Flow

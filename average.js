@@ -5,6 +5,7 @@ module.exports = function(RED) {
         RED.nodes.createNode(this, config);
 
         var node = this;
+        this.topic = config.topic;
         this.topics = {};
 
         this.on("input", function(msg) {
@@ -21,6 +22,12 @@ module.exports = function(RED) {
                     }, 0);
 
                     msg.payload = sum / amount;
+
+                    // overwrite topic if configured
+                    if( node.topic ) {
+                        msg.topic = node.topic;
+                    }
+
                     node.send(msg);
                 }
                 else {

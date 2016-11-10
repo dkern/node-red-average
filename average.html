@@ -10,11 +10,11 @@
 </script>
 
 <script type="text/x-red" data-help-name="average">
-    <p>Calculate the average of incoming <code>msg.payload</code> values.</p>
+    <p>Calculate the average of incoming <code>msg.payload</code> values from across a number of different <code>msg.topic</code>.</p>
     <p>Incoming <code>msg.topic</code> has to be used to separate and identify values.
     Messages not containing a valid numeric value will be rejected.</p>
-    <p>Will return the current average as <code>msg.payload</code>. Every other
-    properties of incoming message will be pushed through.</p>
+    <p>Will return the current average of all different <code>msg.topic</code> values as <code>msg.payload</code>.
+    Every other properties of incoming message will be pushed through.</p>
 </script>
 
 <script type="text/javascript">

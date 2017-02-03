@@ -12,7 +12,16 @@ module.exports = function(RED) {
             if( msg.hasOwnProperty("payload") ) {
                 var input = Number(msg.payload);
 
-                if( !isNaN(input) && isFinite(input) ) {
+                // handle reset
+                if( msg.hasOwnProperty("reset") && msg.reset ) {
+                    node.topics = {};
+
+                    msg.payload = 0;
+                    node.send(msg);
+                }
+
+                // handle input
+                else if( !isNaN(input) && isFinite(input) ) {
                     node.topics[msg.topic.toString()] = input;
 
                     var amount = 0;
@@ -30,6 +39,8 @@ module.exports = function(RED) {
 
                     node.send(msg);
                 }
+
+                // everything else
                 else {
                     node.log("Not a number: " + msg.payload);
                 }

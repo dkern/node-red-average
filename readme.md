@@ -38,6 +38,9 @@ Messages not containing a valid numeric value will be rejected.
 Will return the current average of all different `msg.topic` values as `msg.payload`.
 Every other data will be pushed through.
 
+The average can be reset with an incoming message that contains `msg.reset`.
+Then all stored data will be removed and the initial average starts at zero again.
+
 
 ## Example Flow
 
@@ -46,7 +49,7 @@ Simple example showing how to calculate and average of static values.
 ![example.png](./doc/example.png)
 
 ```JSON
-[{"id":"b022f03f.da047","type":"average","z":"470977d9.9fb538","name":"","x":680,"y":240,"wires":[["5a8eea2a.b67d3c"]]},{"id":"5a8eea2a.b67d3c","type":"debug","z":"470977d9.9fb538","name":"debug","active":true,"console":"false","complete":"payload","x":810,"y":240,"wires":[]},{"id":"c79942e7.6ae498","type":"inject","z":"470977d9.9fb538","name":"1","topic":"name_one","payload":"1","payloadType":"num","repeat":"","crontab":"","once":false,"x":510,"y":180,"wires":[["b022f03f.da047"]]},{"id":"5b6c2de0.a35dc4","type":"inject","z":"470977d9.9fb538","name":"2","topic":"name_two","payload":"2","payloadType":"num","repeat":"","crontab":"","once":false,"x":510,"y":220,"wires":[["b022f03f.da047"]]},{"id":"689a005a.9f41b8","type":"inject","z":"470977d9.9fb538","name":"3","topic":"name_three","payload":"3","payloadType":"num","repeat":"","crontab":"","once":false,"x":510,"y":260,"wires":[["b022f03f.da047"]]},{"id":"4b264eb1.263c88","type":"inject","z":"470977d9.9fb538","name":"4","topic":"name_four","payload":"4","payloadType":"num","repeat":"","crontab":"","once":false,"x":510,"y":300,"wires":[["b022f03f.da047"]]}]
+[{"id":"5a8eea2a.b67d3c","type":"debug","z":"470977d9.9fb538","name":"debug","active":true,"console":"false","complete":"true","x":870,"y":200,"wires":[]},{"id":"c79942e7.6ae498","type":"inject","z":"470977d9.9fb538","name":"1","topic":"name_one","payload":"1","payloadType":"num","repeat":"","crontab":"","once":false,"x":470,"y":80,"wires":[["60d50df3.aacf5c"]]},{"id":"5b6c2de0.a35dc4","type":"inject","z":"470977d9.9fb538","name":"2","topic":"name_two","payload":"2","payloadType":"num","repeat":"","crontab":"","once":false,"x":470,"y":120,"wires":[["60d50df3.aacf5c"]]},{"id":"689a005a.9f41b8","type":"inject","z":"470977d9.9fb538","name":"3","topic":"name_three","payload":"3","payloadType":"num","repeat":"","crontab":"","once":false,"x":470,"y":160,"wires":[["60d50df3.aacf5c"]]},{"id":"4b264eb1.263c88","type":"inject","z":"470977d9.9fb538","name":"4","topic":"name_four","payload":"4","payloadType":"num","repeat":"","crontab":"","once":false,"x":470,"y":200,"wires":[["60d50df3.aacf5c"]]},{"id":"60d50df3.aacf5c","type":"average","z":"470977d9.9fb538","name":"","topic":"","x":740,"y":200,"wires":[["5a8eea2a.b67d3c"]]},{"id":"96ae6e69.adecc8","type":"inject","z":"470977d9.9fb538","name":"reset","topic":"","payload":"","payloadType":"date","repeat":"","crontab":"","once":false,"x":470,"y":240,"wires":[["49c46c67.385fc4"]]},{"id":"49c46c67.385fc4","type":"function","z":"470977d9.9fb538","name":"msg","func":"msg.reset = true;\nreturn msg;","outputs":1,"noerr":0,"x":590,"y":240,"wires":[["60d50df3.aacf5c"]]}]
 ```
 
 

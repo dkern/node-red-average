@@ -31,6 +31,8 @@ module.exports = function(RED) {
                     }, 0);
 
                     msg.payload = sum / amount;
+                    
+                    msg.amount = amount;
 
                     // overwrite topic if configured
                     if( node.topic ) {

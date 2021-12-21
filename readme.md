@@ -35,7 +35,7 @@ Calculate the average of incoming `msg.payload` values from across a number of d
 Incoming `msg.topic` has to be used to separate and identify values.
 Messages not containing a valid numeric value will be rejected.
 
-Will return the current average of all different `msg.topic` values as `msg.payload` the number of different `msg.topic` used to calculate the avergae in `msg.amount`.
+Will return the current average of all different `msg.topic` values as `msg.payload` and the number of different `msg.topic` used to calculate the avergae in `msg.amount`.
 Every other data will be pushed through.
 
 The average can be reset with an incoming message that contains `msg.reset`.

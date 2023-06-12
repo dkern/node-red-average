@@ -13,7 +13,7 @@
     <p>Calculate the average of incoming <code>msg.payload</code> values from across a number of different <code>msg.topic</code>.</p>
     <p>Incoming <code>msg.topic</code> has to be used to separate and identify values.
     Messages not containing a valid numeric value will be rejected.</p>
-    <p>Will return the current average of all different <code>msg.topic</code> values as <code>msg.payload</code>.
+    <p>Will return the current average of all different <code>msg.topic</code> values as <code>msg.payload</code>, and the number of different <code>msg.topic</code> used to calculate <code>msg.payload</code> as <code>msg.topics_count</code>.
     Every other properties of incoming message will be pushed through.</p>
     <p>The average can be reset with an incoming message that contains <code>msg.reset</code>.
     Then all stored data will be removed and the initial average starts at zero again.</p>

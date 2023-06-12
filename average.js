@@ -1,41 +1,40 @@
 module.exports = function(RED) {
-    "use strict";
+    'use strict';
 
     function average(config) {
         RED.nodes.createNode(this, config);
 
-        var node = this;
+        let node = this;
+
         this.topic = config.topic;
         this.topics = {};
 
-        this.on("input", function(msg) {
-            if( msg.hasOwnProperty("payload") ) {
-                var input = Number(msg.payload);
+        this.on('input', (msg) => {
+            if (msg.hasOwnProperty('payload')) {
+                let input = Number(msg.payload);
 
                 // handle reset
-                if( msg.hasOwnProperty("reset") && msg.reset ) {
+                if (msg.hasOwnProperty('reset') && msg.reset) {
                     node.topics = {};
-
                     msg.payload = 0;
                     node.send(msg);
                 }
 
                 // handle input
-                else if( !isNaN(input) && isFinite(input) ) {
+                else if (!isNaN(input) && isFinite(input)) {
                     node.topics[msg.topic.toString()] = input;
 
-                    var amount = 0;
-                    var sum = Object.keys(node.topics).reduce(function(a, b) {
+                    let amount = 0;
+                    let sum = Object.keys(node.topics).reduce((a, b) => {
                         ++amount;
                         return a + node.topics[b];
                     }, 0);
 
                     msg.payload = sum / amount;
-                    
                     msg.topics_count = amount;
 
                     // overwrite topic if configured
-                    if( node.topic ) {
+                    if (node.topic) {
                         msg.topic = node.topic;
                     }
 
@@ -44,11 +43,11 @@ module.exports = function(RED) {
 
                 // everything else
                 else {
-                    node.log("Not a number: " + msg.payload);
+                    node.log(`Not a number: ${msg.payload}`);
                 }
             }
         });
     }
 
-    RED.nodes.registerType("average", average);
+    RED.nodes.registerType('average', average);
 };
